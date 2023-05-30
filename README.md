@@ -1,92 +1,149 @@
-# 2023-2 - Trabalho 2 - Redes de Computadores
+## Disciplina Redes de Computadores 1 - Engenharia de Computação/Elétrica - UTFPR - 2023/1
+## Disciplina Redes de Computadores - Tecnologia em Análise e Desenvolvimento de Sistemas - UTFPR - 2023/1
+
+
+# Trabalho 2 - Integração de Habilidades
+
+
+## Objetivo
+Este trabalho prático compreende a criação de uma topologia de rede simulando uma situação real.  Ao final da execução desta avaliação, você estará demonstrando a sua capacidade de criar diferentes cenários de rede, assim como o trabalho em equipe. Com a conclusão desta atividade, você será capaz de demonstrar que obteve as seguintes habilidades:
+* Projetar a rede lógica;
+* Configurar a topologia física e lógica;
+* Definir as rotas estáticas para redes remotas;
+* Fazer a documentação da rede;
+* Configurar switches, roteadores e dispositivos finais de modo a permitir a comunicação entre todos;
+* Verificar a conectividade entre os dispositivos usando protocolo IPv4 e IPv6;
+* Definir propriedades de segurança nos equipamentos;
+* Trabalho em equipe.
+
+## Topologia
+Neste trabalho, você criará uma pequena topologia para interligação da Matriz de uma empresa localizada em Pato Branco e suas Filiais localizadas em Francisco Beltrão e Coronel Vivida.  A topologia a ser utilizada está apresentada na [Figura 1](#figura1). 
+![figura1](topologia.png "Topologia do Trabalho 2")
+
+**Figura 1 - Topologia**
 
 
 
-## Getting started
+## Tarefa 1: Projetar e documentar as sub-redes
+Utilize o bloco de endereço IPv4 200.134.**N**.0/24 e IPv6 2001:DB8:CAFE:**NN**00::/56 para criar sub-redes de forma a atender os prefixos especificados na topologia, as demais especificações devem atender as seguintes demandas:
+* O número N e NN equivalem aos dois últimos números do seu RA, sendo que NN deve ser convertido para hexadecimal. Ex: se o seu número for **1**1, ficaria 200.134.**11**.0/24 e 2001:0DB8:CAFE:**0B**00::/56.
+* O prefixo IPv4 para a LAN da Matriz deve ser **/26** e para a Filial 1 deve ser **/27**;
+    * Deve-se prever a expansão da empresa com três novas filiais (Filial 2, Filial 3, Filial 4), todas com o prefixo **/27**.
+* O prefixo IPv6 para as LANs, tanto da Matriz como das Filiais, deve ser **/64**;
+* O prefixo para as WANs deve ser **/30** (IPv4) e **/112** (IPv6);
+* Utilize a **primeira** sub-rede para endereçar os dispositivos da LAN da Matriz;
+* Utilize a **segunda** sub-rede para endereçar os dispositivos da LAN da Filial 1;
+* Utilize a **terceira** sub-rede para endereçar os dispositivos da LAN da Filial 2;
+* Reserve a **quarta** e **quinta** sub-redes para novas filiais da empresa; 
+* No IPv4, utilize a **última sub-rede /27** disponível para criar sub-redes /30 para endereçar os enlaces entre os roteadores (pb-vit, vit-fb, fb-ita, ita-pb, ita-cv e as novas filiais);
+* No IPv6, utilize a **última sub-rede /64** disponível para criar sub-redes /112 para endereçar os enlaces entre os roteadores (pb-vit, vit-fb, fb-ita, ita-pb, ita-cv e as novas filiais). Utilize o algoritmo Righmost (RFC 3531), para criar as sub-redes. Sugestão: usar o simulador disponível em [http://ipv6.br/paginas/old_subnet](http://ipv6.br/paginas/old_subnet).
+* Documente as sub-redes conforme [modelo](trabalho2-documentacao-NomeAluno.md).
+    * Sugere-se que você insira as informações de sub-rede também na topologia (PacketTracer), para ficar mais fácil a visualização.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Tarefa 2: Documentar a configuração da rede lógica dos dispositivos
+Os endereços IP das interfaces dos Hosts e Roteadores devem ser atribuídos da seguinte maneira:
+* O PC1 usará o **terceiro** endereço de host válido da sub-rede da Matriz;
+* O PC2 usará o **quarto** endereço de host válido da sub-rede da Matriz;
+* O PC3 usará o **terceiro** endereço de host válido da sub-rede da Filial 1;
+* O PC4 usará o **quarto** endereço de host válido da sub-rede da Filial 1;
+* O PC5 usará o **terceiro** endereço de host válido da sub-rede da Filial 2;
+* O PC6 usará o **quarto** endereço de host válido da sub-rede da Filial 2;
+* Os switches usarão o **segundo** endereço de host válido da respectiva LAN;
+* Atribuir à interface Fa0/0 do roteador Pato Branco o **primeiro** endereço de host válido da sub-rede da Matriz;
+* Atribuir à interface Fa0/0 do roteador Francisco Beltrão o **primeiro** endereço de host válido da sub-rede  Filial 1;
+* Atribuir à interface Fa0/0 do roteador Coronel Vivida o **primeiro** endereço de host válido da sub-rede  Filial 2;
+* Atribuir  à interface Se0/0/0 de cada roteador o **primeiro** endereço de host válido da sub-rede de ligação entre os roteadores. 
+    * Esta interface será o **DCE**, com clock rate de **56000**.
+* Atribuir à interface Se0/0/1 de cada roteador o **segundo** endereço de host válido da sub-rede de ligação entre os roteadores.
+* Atribuir à interface Fa0/1 do roteador Itapejara o **primeiro** endereço de host válido da sub-rede de ligação entre os roteadores.
+* Atribuir à interface Fa0/1 do roteador Coronel Vivida o **segundo** endereço de host válido da sub-rede de ligação entre os roteadores.
+* Para IPv6, também deve-se especificar os endereços de link-local para as conexões, sendo:
+    * nos computadores deve-se usar **EUI-64** para atribuição do endereço de **link-local**.
+    * as ligações (WAN) entre roteadores deve se usar **EUI-64** para atribuição do endereço de **link-local**;
+    * as ligações entre o roteador e as LANs deve ser especificar manualmente os endereços usando o endereço **FE80::1**, isto é, todas as interfaces Fa0/0 terão o IPv6 de link-local igual **FE80::1**;
+* Documente o endereçamento para os dispositivos conforme [modelo](trabalho2-documentacao-NomeAluno.md).
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-## Add your files
+## Tarefa 3: Documentar as tabelas de roteamento
+* Definir as rotas em todos os roteadores de forma que os computadores da Matriz alcancem os computadores das filiais no **sentido horário**, isto é, através da rota “Pato Branco --> Vitorino --> Francisco Beltrão” e sejam respondidos pelo caminho oposto “Francisco Beltrão --> Itapejara D’Oeste --> Pato Branco”. O fluxo de ida é feito através de Vitorino e as respostas através de Itapejara D’Oeste.
+* Documentar as tabelas de roteamento para IPv4 e IPv6, conforme modelo [modelo](trabalho2-documentacao-NomeAluno.md). 
+    * Não é obrigatório documentar as redes diretamente conectadas.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+    
+## Tarefa 4: Configuração básica dos dispositivos no Packet Tracer
+* **Criar a topologia no Packet Tracer**, conforme ilustrado na **Figura 1**. 
+    * Deve ser usado *roteadores modelo 2811* (inserir uma interface WIC-2T no slot 0 para as conexões WAN) e *switches modelo 2960*, que são os equipamentos disponíveis no laboratório de redes;
+    * Na área de trabalho de cada topologia deve ser informado o **RA + Nome do aluno**;
+        * Sugere-se que seja inserido as informações de endereçamento na topologia (área de trabalho do Packet Tracer), para ficar mais fácil a visualização.  
+* **Nomear** os dispositivos intermediários (roteadores e switches) no IOS, como:
+	 * Roteador Pato Branco para r-pb-nnn
+	 * Roteador Francisco Beltrão para r-fb-nnn
+	 * Roteador Itapejara para r-ita-nnn
+	 * Roteador Vitorino para r-vit-nnn
+	 * Roteador Coronel Vivida para r-cv-nnn
+	 * Switch Matriz para sw-matriz-nnn
+	 * Switches Filial 1 e Filial 2, para sw-filial1-nnn e sw-filial2-nnn, respectivamente
+      Obs: **nnn** refere-se às iniciais do seu nome, ex: **r-pb-ff** / **sw-matriz-ff** (Fábio Favarim).
+* **Endereçar** todas as interfaces de rede dos computadores (IPv4/máscara, IPv6/prefixo e gateway), roteadores (IPv4/máscara, IPv6/prefixo), switches (IPv4 na SVI e gateway) de acordo com o que foi documentado no **Quadro 2**.
+    * Lembre-se que a interface serial Se0/0/0 será o DCE e assim deve ser configurado o clock rate de 56000.
+    * Basta executar o comando “clock rate 56000” na inferface Se0/0/0.
+* **Inserir** uma descrição em cada interface dos roteadores, de acordo com a rede a qual está conectada (ex: Matriz, pb-vit, vit-fb);
+* **Configurar** as rotas estáticas  de acordo com o que foi documentado nos **Quadros 3 a 6**.
+	 * Lembre-se que somente é necessário definir as rotas estáticas para as redes distantes, pois as rotas para as redes diretamente conectadas, automaticamente são criadas pelo roteador;
+* **Testar** a topologia;
+    * Execute o **ping**, via linha de comando (*command prompt*), a partir do PC0 para todas as outras interfaces existentes na topologia (dispositivos finais e intermediários);
+    * Lembre-se de testar para IPv4 e para IPv6.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/favarim/20232-t2-redes.git
-git branch -M main
-git push -uf origin main
-```
+## Tarefa 5: Configuração de medidas básicas de segurança
+ * Implementar as medidas básicas de seguranças nos *roteadores*
+	 * Exigir que as senhas tenham comprimento mínimo de 10 caracteres;
+	 * Impedir tentativas de login por ataque de força bruta de modo a bloquear tentativas de login por 120 segundos se houver 3 tentativas de login com falha dentro de 60 segundos;
+	 * Encerrar as conexões via console e VTY após 5 minutos de inatividade;
+	 * Ativar o serviço de criptografia de senhas em texto simples;
+	 * Proteger o acesso ao EXEC privilegiado com a senha secreta @dmin-nome, sendo nome, o seu primeiro nome.
+	 * Proteger o acesso via console com a senha @Cons-nome;
+	 * Configure um banner MOTD para informar sobre o acesso não autorizado, conforme exemplo:
+```	
+--------------------------------------------------------------------------
+|                                                                        |
+|                          Roteador Pato Branco                          |
+|                                                                        |
+|               ATENÇÃO Acesso Restrito a pessoas autorizadas!           |
+|                                                                        |
+|          Administrador: SEU NOME COMPLETO (email@seuemail.com)         |
+|                                                                        |
+--------------------------------------------------------------------------
+```    
 
-## Integrate with your tools
+ * Permitir o acesso remoto (linhas VTY 0 15) ao dispositivo somente via SSH e com usuário local:
+	 * usar nome.sobrenome.com.br como nome de domínio (ex: fabio.favarim.com.br);
+	 * usar nome e ssh@Network1ng como nome e senha, respectivamente, sendo nome o seu  primeiro nome;
+	 * O tamanho da chave deve ser 1024.
+	 
+**Observação:** Todas as configurações nos roteadores devem ser feitas via CLI;
 
-- [ ] [Set up project integrations](https://gitlab.com/favarim/20232-t2-redes/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Avaliação
+* As Tarefas 1 a 5 é individual, porém, poderá ser feita em grupo! 
+	 * No entanto, cada aluno deve fazer a sua atividade e ter total domínio do que foi feito.
+* Entrega 1 - Entregar, via moodle, arquivo conforme o [modelo](trabalho2-documentacao-NomeAluno.md), nomeado como trabalho2-documentacao-NomeAluno.pdf contendo:
+    * RA e Nome do aluno;
+    * Documentação correspondente as Tarefas 1, 2 e 3;
+    * Outras informações que achar relevante;
+    * Data da entrega: até **08/11/2022 às 18h40min**
+        * Não será aceita entrega após o prazo;
+        * Obs: no dia **08/11/2022** às 18h40min será disponibilizado o gabarito para conferência e ajustes caso necessário;
+* Entrega 2 – Entrega, via moodle, arquivo compactado nomeado trabalho2-nomealuno.zip, contendo:
+	 * arquivo com a documentação da Entrega 1, corrigida, se for o caso;
+	 * arquivo em formato .pkt (Packet Tracer), nomeado como trabalho2-topologia-NomeAluno.pkt com a topologia configurada e funcionando no Packet Tracer (Tarefas 4 e 5).
+	 	 * Data da entrega: até **15/11/2022 às 18h40min**;
+           
+          
+## Critérios de Avaliação:
+* Entrega 1 – Documentação
+    * Tarefa 1: 1 ponto
+    * Tarefa 2: 1 ponto
+    * Tarefa 3: 1 ponto
+* Entrega 2 – Topologia Funcionando no Packet Tracer
+    * Tarefa 4: 5 pontos
+    * Tarefa 5: 1 ponto
+* Teste de autoria: não vale nota, porém, é critério para validar a autoria do trabalho. 
