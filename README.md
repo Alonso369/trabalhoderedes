@@ -127,13 +127,15 @@ Os endereços IP das interfaces dos Hosts e Roteadores devem ser atribuídos da 
     * RA e Nome do aluno;
     * Documentação correspondente as Tarefas 1, 2 e 3;
     * Outras informações que achar relevante;
-    * Data da entrega: até **08/11/2022 às 18h40min**
+    * Data da entrega: até **06/06/2023 às 18h40min**
         * Não será aceita entrega após o prazo;
-        * Obs: no dia **08/11/2022** às 18h40min será disponibilizado o gabarito para conferência e ajustes caso necessário;
+        * Obs: no dia **06/06/2023 às 18h40min** será disponibilizado o gabarito para conferência e ajustes caso necessário;
 * Entrega 2 – Entrega, via moodle, arquivo compactado nomeado trabalho2-nomealuno.zip, contendo:
 	 * arquivo com a documentação da Entrega 1, corrigida, se for o caso;
 	 * arquivo em formato .pkt (Packet Tracer), nomeado como trabalho2-topologia-NomeAluno.pkt com a topologia configurada e funcionando no Packet Tracer (Tarefas 4 e 5).
-	 	 * Data da entrega: até **15/11/2022 às 18h40min**;
+	    * Data da entrega: até **13/06/2023 às 18h40min**;
+            * Não será aceita entrega após o prazo;
+
            
           
 ## Critérios de Avaliação:
