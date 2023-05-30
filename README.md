@@ -25,7 +25,7 @@ Neste trabalho, você criará uma pequena topologia para interligação da Matri
 
 ## Tarefa 1: Projetar e documentar as sub-redes
 Utilize o bloco de endereço IPv4 200.134.**N**.0/24 e IPv6 2001:DB8:CAFE:**NN**00::/56 para criar sub-redes de forma a atender os prefixos especificados na topologia, as demais especificações devem atender as seguintes demandas:
-* O número N e NN equivalem aos dois últimos números do seu RA, sendo que NN deve ser convertido para hexadecimal. Ex: se o seu número for **1**1, ficaria 200.134.**11**.0/24 e 2001:0DB8:CAFE:**0B**00::/56.
+* O número N e NN equivalem aos dois últimos números do seu RA, sendo que NN deve ser convertido para hexadecimal. Ex: se o seu número for **11**, ficaria 200.134.**11**.0/24 e 2001:0DB8:CAFE:**0B**00::/56.
 * O prefixo IPv4 para a LAN da Matriz deve ser **/26** e para a Filial 1 deve ser **/27**;
     * Deve-se prever a expansão da empresa com três novas filiais (Filial 2, Filial 3, Filial 4), todas com o prefixo **/27**.
 * O prefixo IPv6 para as LANs, tanto da Matriz como das Filiais, deve ser **/64**;
@@ -35,8 +35,7 @@ Utilize o bloco de endereço IPv4 200.134.**N**.0/24 e IPv6 2001:DB8:CAFE:**NN**
 * Utilize a **terceira** sub-rede para endereçar os dispositivos da LAN da Filial 2;
 * Reserve a **quarta** e **quinta** sub-redes para novas filiais da empresa; 
 * No IPv4, utilize a **última sub-rede /27** disponível para criar sub-redes /30 para endereçar os enlaces entre os roteadores (pb-vit, vit-fb, fb-ita, ita-pb, ita-cv e as novas filiais);
-* No IPv6, utilize a **última sub-rede /64** disponível para criar sub-redes /112 para endereçar os enlaces entre os roteadores (pb-vit, vit-fb, fb-ita, ita-pb, ita-cv e as novas filiais). Utilize o algoritmo Righmost (RFC 3531), para criar as sub-redes. Sugestão: usar o simulador disponível em [http://ipv6.br/paginas/old_subnet](http://ipv6.br/paginas/old_subnet).
-* Documente as sub-redes conforme [modelo](trabalho2-documentacao-NomeAluno.md).
+* No IPv6, utilize a **última sub-rede /64** disponível para criar sub-redes /112 para endereçar os enlaces entre os roteadores (pb-vit, vit-fb, fb-ita, ita-pb, ita-cv e as novas filiais).
     * Sugere-se que você insira as informações de sub-rede também na topologia (PacketTracer), para ficar mais fácil a visualização.
 
 ## Tarefa 2: Documentar a configuração da rede lógica dos dispositivos
