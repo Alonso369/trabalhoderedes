@@ -33,7 +33,7 @@ Utilize o bloco de endereço IPv4 200.134.**N**.0/24 e IPv6 2001:DB8:CAFE:**NN**
 * Utilize a **primeira** sub-rede para endereçar os dispositivos da LAN da Matriz;
 * Utilize a **segunda** sub-rede para endereçar os dispositivos da LAN da Filial 1;
 * Utilize a **terceira** sub-rede para endereçar os dispositivos da LAN da Filial 2;
-* Reserve a **quarta** e **quinta** sub-redes para novas filiais da empresa; 
+* Reserve a **quarta, quinta** e **sexta** sub-redes para as novas filiais da empresa; 
 * No IPv4, utilize a **última sub-rede /27** disponível para criar sub-redes /30 para endereçar os enlaces entre os roteadores (pb-vit, vit-fb, fb-ita, ita-pb, ita-cv e as novas filiais);
 * No IPv6, utilize a **última sub-rede /64** disponível para criar sub-redes /112 para endereçar os enlaces entre os roteadores (pb-vit, vit-fb, fb-ita, ita-pb, ita-cv e as novas filiais).
     * Sugere-se que você insira as informações de sub-rede também na topologia (PacketTracer), para ficar mais fácil a visualização.
