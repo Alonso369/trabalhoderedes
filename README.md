@@ -27,7 +27,7 @@ Neste trabalho, você criará uma pequena topologia para interligação da Matri
 Utilize o bloco de endereço IPv4 200.134.**N**.0/24 e IPv6 2001:DB8:CAFE:**NN**00::/56 para criar sub-redes de forma a atender os prefixos especificados na topologia, as demais especificações devem atender as seguintes demandas:
 * O número N e NN equivalem aos dois últimos números do seu RA, sendo que NN deve ser convertido para hexadecimal. Ex: se o seu número for **11**, ficaria 200.134.**11**.0/24 e 2001:0DB8:CAFE:**0B**00::/56.
 * O prefixo IPv4 para a LAN da Matriz deve ser **/26** e para a Filial 1 deve ser **/27**;
-    * Deve-se prever a expansão da empresa com três novas filiais (Filial 2, Filial 3, Filial 4), todas com o prefixo **/27**.
+    * Deve-se prever a expansão da empresa com quatro novas filiais (Filial 2, Filial 3, Filial 4, Filial 5), todas com o prefixo **/27**.
 * O prefixo IPv6 para as LANs, tanto da Matriz como das Filiais, deve ser **/64**;
 * O prefixo para as WANs deve ser **/30** (IPv4) e **/112** (IPv6);
 * Utilize a **primeira** sub-rede para endereçar os dispositivos da LAN da Matriz;
