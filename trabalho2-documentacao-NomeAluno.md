@@ -122,7 +122,7 @@
 | 2001:db8:acad:75ff::00:0/112 | 2001:db8:acad:75ff::02:2/112 |      Se0/0/0       |
       
 #### Roteador Vitorino
-| Rede de Destino/Prefixo      | Next Hop                            face de Saída |
+| Rede de Destino/Prefixo      | Next Hop                     | Interface de Saída |
 |------------------------------|------------------------------|--------------------|
 | 2001:db8:acad:7501::/64      | 2001:db8:acad:75ff::01:02/112|     Se0/0/0        |
 | 2001:db8:acad:75ff:02:00/112 | 2001:db8:acad:75ff::01:02/112|     Se0/0/0        |
