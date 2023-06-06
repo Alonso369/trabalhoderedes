@@ -105,11 +105,11 @@
 #### Roteador Pato Branco
 | Rede de Destino/Prefixo      | Next Hop                     | Interface de Saída |
 |------------------------------|------------------------------|--------------------|
-|                              |                              |                    |
-|                              |                              |                    |
-|                              |                              |                    |
-|                              |                              |                    |
-|                              |                              |                    |
+|                              |                              |       Se0/0/0      |
+|                              |                              |       Se0/0/0      |
+|                              |                              |       Se0/0/0      |
+|                              |                              |       Se0/0/0      |
+|                              |                              |       Se0/0/0      |
       
       
 #### Roteador Francisco Beltrão
